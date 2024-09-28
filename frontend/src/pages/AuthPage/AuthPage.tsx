@@ -12,9 +12,11 @@ import { RootState } from "src/store/store";
 
 import styles from "./AuthPage.module.css";
 
-interface AuthPageProps {}
+interface AuthPageProps {
+  login: () => void;
+}
 
-export const AuthPage: React.FC<AuthPageProps> = () => {
+export const AuthPage: React.FC<AuthPageProps> = ({ login }) => {
   // const user = useSelector((state: RootState) => state.auth.user);
 
   return (
@@ -29,7 +31,9 @@ export const AuthPage: React.FC<AuthPageProps> = () => {
             <TextInput label="Password" hasClear={true} />
           </div>
           <Flex gap="4">
-            <Button view="action">Войти</Button>
+            <Button view="action" onClick={login}>
+              Войти
+            </Button>
             <Button>Регистрация</Button>
           </Flex>
         </Flex>

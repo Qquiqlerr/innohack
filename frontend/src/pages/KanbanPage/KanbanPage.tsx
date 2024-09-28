@@ -1,4 +1,4 @@
-import { Container, Flex, RadioButton } from "@gravity-ui/uikit";
+import { Button, Card, Container, Flex, RadioButton } from "@gravity-ui/uikit";
 import { groupBy } from "lodash";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,9 +7,11 @@ import { RootState } from "src/store/store";
 import { Project } from "../../../api/fetchers/projectManagerSchemas";
 import { KanbanList } from "./../../components/KanbanList/KanbanList";
 
-interface KanbanPageProps {}
+interface KanbanPageProps {
+  goToAuth: () => void;
+}
 
-export const KanbanPage: React.FC<KanbanPageProps> = () => {
+export const KanbanPage: React.FC<KanbanPageProps> = ({ goToAuth }) => {
   const projects = useSelector<RootState>(
     (state) => state.projects.projectsList,
   ) as Project[];
@@ -42,24 +44,27 @@ export const KanbanPage: React.FC<KanbanPageProps> = () => {
   return (
     <Container maxWidth="xl">
       <Flex direction="column" gap="4">
-        <div>
-          <RadioButton
-            options={[
-              {
-                value: ALL_PROJECTS_FILTER,
-                content: "Все проекты",
-              },
-              ...projects.map((project) => ({
-                value: String(project.id),
-                content: project.name,
-              })),
-            ]}
-            value={String(currentProjectId)}
-            onUpdate={(value) => {
-              setCurrentProjectId(value);
-            }}
-          />
-        </div>
+        <Card style={{ padding: "var(--g-spacing-4)" }} view="raised">
+          <Flex justifyContent="space-between">
+            <RadioButton
+              options={[
+                {
+                  value: ALL_PROJECTS_FILTER,
+                  content: "Все проекты",
+                },
+                ...projects.map((project) => ({
+                  value: String(project.id),
+                  content: project.name,
+                })),
+              ]}
+              value={String(currentProjectId)}
+              onUpdate={(value) => {
+                setCurrentProjectId(value);
+              }}
+            />
+            <Button onClick={goToAuth}>Выйти</Button>
+          </Flex>
+        </Card>
         <Flex gap="8">
           <KanbanList
             name="Ожидает"

@@ -1,12 +1,13 @@
 import { ArrowLeft, ArrowRight } from "@gravity-ui/icons";
 import { Button, Card, Flex, Icon, Label, Text } from "@gravity-ui/uikit";
 import React from "react";
-import { updateTaskData } from "src/store/slices/projectThunks";
 
 import { Task } from "../../../../api/fetchers/projectManagerSchemas";
+import { updateTaskData } from "../../../store/slices/projectThunks";
 import styles from "./KanbanCard.module.css";
 
 export type FlatTask = {
+  showProjectName?: boolean;
   projectData?: {
     name?: string;
     id?: number;
@@ -16,12 +17,13 @@ export type FlatTask = {
 type KanbanCardProps = FlatTask;
 
 export const KanbanCard: React.FC<KanbanCardProps> = ({
+  showProjectName,
   projectData,
   name,
   status,
   id,
 }) => {
-  if (!id || !status) {
+  if (id === undefined || status === undefined) {
     throw new Error("Task [id, status] are required");
   }
 
@@ -34,11 +36,13 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       <Flex justifyContent="space-between">
         <Flex direction="column" gap="4">
           <Text>{name}</Text>
-          <div>
-            <Label>
-              <Text>{projectData?.name}</Text>
-            </Label>
-          </div>
+          {showProjectName && (
+            <div>
+              <Label>
+                <Text>{projectData?.name}</Text>
+              </Label>
+            </div>
+          )}
         </Flex>
         <Flex direction="column" gap="2">
           <Button disabled={status === 0} onClick={() => move(status - 1)}>
