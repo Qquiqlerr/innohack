@@ -62,7 +62,7 @@ export const addTaskToProject = createAsyncThunk<
 export const updateTaskData = createAsyncThunk<
   Task,
   { taskId: number; newStatus: NonNullable<Task["status"]> }
->("projects/addTaskToProject", async ({ taskId, newStatus }, thunkAPI) => {
+>("projects/updateTaskData", async ({ taskId, newStatus }, thunkAPI) => {
   try {
     const response = await updateTask({
       pathParams: { id: taskId },

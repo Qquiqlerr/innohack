@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-// import { AuthPage } from "./pages/AuthPage/AuthPage";
+import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { KanbanPage } from "./pages/KanbanPage/KanbanPage";
 
 function App() {
-  return <KanbanPage />;
+  const [currentPage, setCurrentPage] = useState<"kanban" | "auth">("kanban");
+
+  return (
+    <>
+      {currentPage === "kanban" ? (
+        <KanbanPage goToAuth={() => setCurrentPage("auth")} />
+      ) : (
+        <AuthPage login={() => setCurrentPage("kanban")} />
+      )}
+    </>
+  );
 }
 
 export default App;
