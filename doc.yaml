@@ -130,10 +130,10 @@ paths:
             type: integer
         - name: status
           in: query
-          description: Статус задач для фильтрации
+          description: Статус задач для фильтрации(1 - ожидает, 2 - в работе, 3 - выполнена)
           required: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Успешный ответ
