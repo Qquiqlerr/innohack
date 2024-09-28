@@ -1,0 +1,13 @@
+.container {
+    height: 30vh;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.authCard {
+    padding: var(--g-spacing-4);
+    width: 600px;
+}

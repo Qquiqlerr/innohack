@@ -17,6 +17,7 @@ paths:
     get:
       summary: Получить список всех проектов
       description: Получить список проектов
+      operationId: getAllProjects
       tags:
         - api
       responses:
@@ -37,6 +38,7 @@ paths:
     post:
       summary: Создать новый проект
       description: Создать проект с необходимыми полями
+      operationId: createProject
       tags:
         - api
       requestBody:
@@ -62,6 +64,7 @@ paths:
     put:
       summary: Обновить существующий проект
       description: Обновить проект по его ID
+      operationId: updateProject
       tags:
         - api
       parameters:
@@ -98,6 +101,7 @@ paths:
     delete:
       summary: Удалить проект
       description: Удалить проект по его ID
+      operationId: deleteProject
       tags:
         - api
       parameters:
@@ -119,6 +123,7 @@ paths:
     get:
       summary: Получить список всех задач
       description: Получить список задач с возможностью фильтрации по `projectID` и `status`
+      operationId: getAllTasks
       tags:
         - tasks
       parameters:
@@ -149,10 +154,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-
     post:
       summary: Создать новую задачу
       description: Создать задачу с необходимыми полями
+      operationId: createTask
       tags:
         - tasks
       requestBody:
@@ -178,6 +183,7 @@ paths:
     put:
       summary: Обновить задачу
       description: Обновить задачу по ее ID
+      operationId: updateTask
       tags:
         - tasks
       parameters:
@@ -214,6 +220,7 @@ paths:
     delete:
       summary: Удалить задачу
       description: Удалить задачу по ее ID
+      operationId: deleteTask
       tags:
         - tasks
       parameters:
@@ -235,6 +242,7 @@ paths:
     post:
       summary: Аутентификация пользователя
       description: Аутентифицировать пользователя по email и паролю
+      operationId: loginUser
       tags:
         - auth
       requestBody:
@@ -260,6 +268,7 @@ paths:
     post:
       summary: Регистрация пользователя
       description: Зарегистрировать нового пользователя
+      operationId: registerUser
       tags:
         - auth
       requestBody:
