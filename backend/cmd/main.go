@@ -48,7 +48,7 @@ func main() {
 	router.Post("/tasks", taskHandler.CreateTaskHandler)
 	router.Put("/tasks/{id}", taskHandler.UpdateTaskHandler)
 	router.Delete("/tasks/{id}", taskHandler.DeleteTaskHandler)
-
+	log.Println("start server")
 	serv := http.Server{
 		Addr:    "0.0.0.0:80",
 		Handler: router,
