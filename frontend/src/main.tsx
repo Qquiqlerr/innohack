@@ -1,10 +1,22 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import "@gravity-ui/uikit/styles/fonts.css";
+import "@gravity-ui/uikit/styles/styles.css";
 
-createRoot(document.getElementById('root')!).render(
+import { ThemeProvider } from "@gravity-ui/uikit";
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+
+import App from "./App";
+
+const root = document.getElementById("root");
+
+if (!root) {
+  throw new Error("Root element not found");
+}
+
+createRoot(root).render(
   <StrictMode>
-    <App />
+    <ThemeProvider theme="dark">
+      <App />
+    </ThemeProvider>
   </StrictMode>,
-)
+);

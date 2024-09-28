@@ -8,15 +8,7 @@ export default defineConfig({
     react(),
     eslint({
       cache: false,
-      include: [
-        "./src/**/*.ts",
-        "./src/**/*.tsx",
-        "./fetchers/**/*.ts",
-        "./config/**/*.ts",
-        "./i18n/**/*.ts",
-        "./*.ts",
-      ],
-      exclude: ["./src/Sandbox/**.**"],
+      include: ["vite.config.ts", ".eslintrc.cjs", "src"],
     }),
   ],
 });
