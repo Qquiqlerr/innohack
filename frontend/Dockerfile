@@ -6,4 +6,4 @@ RUN npm install
 
 CMD [ "npm", "run", "dev", "--", "--host" ]
 
-EXPOSE 8000
+EXPOSE 5173
