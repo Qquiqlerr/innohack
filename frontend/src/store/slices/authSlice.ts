@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
   async (credentials: Credentials, thunkAPI) => {
     try {
       // Example API request using axios (you can use fetch too)
-      // const response = await axios.post("/api/login", credentials);
+      const response = await axios.post("/api/login", credentials);
       // In this example, response.data will contain `{ id, username, token }`
 
       return response.data as User; // Return the user object

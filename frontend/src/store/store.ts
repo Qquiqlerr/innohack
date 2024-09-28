@@ -6,7 +6,7 @@ import projectsReducer from "./slices/projectsSlice";
 // Configure and type the Redux store
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    // auth: authReducer,
     projects: projectsReducer,
   },
 });

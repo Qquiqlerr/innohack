@@ -4,11 +4,15 @@
  * @version 1.0.0
  */
 export type Project = {
+  id?: number;
   name?: string;
   description?: string;
+  tasks?: Task[];
 };
 
 export type Task = {
+  id?: number;
+  status?: number;
   project_id?: number;
   name?: string;
   description?: string;

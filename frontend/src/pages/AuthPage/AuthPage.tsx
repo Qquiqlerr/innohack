@@ -15,7 +15,7 @@ import styles from "./AuthPage.module.css";
 interface AuthPageProps {}
 
 export const AuthPage: React.FC<AuthPageProps> = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
+  // const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <Container maxWidth="m" className={styles.container}>
