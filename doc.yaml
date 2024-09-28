@@ -295,10 +295,17 @@ components:
     Project:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
         description:
           type: string
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+
     Task:
       type: object
       properties:
