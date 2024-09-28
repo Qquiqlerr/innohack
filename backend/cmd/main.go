@@ -41,11 +41,13 @@ func main() {
 	}))
 	router.Get("/projects", projectHandler.GetProjectsHandler)
 	router.Post("/projects", projectHandler.CreateProjectHandler)
-	router.Post("/projects/{id}", projectHandler.UpdateProjectHandler)
+	router.Put("/projects/{id}", projectHandler.UpdateProjectHandler)
 	router.Delete("/projects/{id}", projectHandler.DeleteProjectHandler)
 
 	router.Get("/tasks", taskHandler.GetTasksHandler)
 	router.Post("/tasks", taskHandler.CreateTaskHandler)
+	router.Put("/tasks/{id}", taskHandler.UpdateTaskHandler)
+	router.Delete("/tasks/{id}", taskHandler.DeleteTaskHandler)
 
 	serv := http.Server{
 		Addr:    "0.0.0.0:80",
