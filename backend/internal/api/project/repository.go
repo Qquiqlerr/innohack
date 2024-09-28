@@ -1,6 +1,7 @@
 package project
 
 import (
+	"contest/internal/api"
 	"contest/internal/db/models"
 	"gorm.io/gorm"
 	"log"
@@ -55,7 +56,7 @@ func (repo *projectRepositoryImpl) DeleteProject(ID int) error {
 		return result.Error
 	}
 	if result.RowsAffected == 0 {
-		return errNotFound
+		return api.ErrNotFound
 	}
 	return nil
 }

@@ -1,6 +1,7 @@
 package project
 
 import (
+	"contest/internal/api"
 	"contest/internal/db/models"
 	"errors"
 	"github.com/go-chi/chi/v5"
@@ -59,7 +60,7 @@ func (h *Handler) UpdateProjectHandler(w http.ResponseWriter, r *http.Request) {
 
 	project.ID = uint(intid)
 	if err := h.service.UpdateProject(&project); err != nil {
-		if errors.Is(err, errNothingToChange) {
+		if errors.Is(err, api.ErrNothingToChange) {
 			render.Status(r, http.StatusBadRequest)
 			log.Println(err, converr)
 			render.JSON(w, r, map[string]string{"error": "Nothing to change"})

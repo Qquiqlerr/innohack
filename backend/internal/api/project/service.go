@@ -1,6 +1,7 @@
 package project
 
 import (
+	"contest/internal/api"
 	"contest/internal/db/models"
 )
 
@@ -25,7 +26,7 @@ func (p *projectService) CreateProject(project *models.Project) error {
 
 func (p *projectService) UpdateProject(project *models.Project) error {
 	if project.Description == "" && project.Name == "" {
-		return errNothingToChange
+		return api.ErrNothingToChange
 	}
 	return p.repo.UpdateProject(project)
 }

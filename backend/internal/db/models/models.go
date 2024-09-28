@@ -17,10 +17,9 @@ type Project struct {
 
 // Модель задачи
 type Task struct {
-	ID          uint   `gorm:"primaryKey"`
-	Name        string `gorm:"not null"`
-	Description string
-	Status      string  `gorm:"type:varchar(50);not null"`
-	ProjectID   uint    // Внешний ключ на проект
-	Project     Project `gorm:"constraint:OnDelete:CASCADE;"` // Привязка к проекту
+	ID          uint   `gorm:"primaryKey" json:"ID"`
+	Name        string `gorm:"not null" json:"name"`
+	Description string `json:"description"`
+	Status      int    `gorm:"not null" json:"status"` // Изменен тип с string на int
+	ProjectID   uint   `json:"projectID"`              // Внешний ключ на проект
 }

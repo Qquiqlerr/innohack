@@ -2,9 +2,11 @@ package main
 
 import (
 	"contest/internal/api/project"
+	"contest/internal/api/task"
 	"contest/internal/db"
 	"contest/internal/db/models"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"log"
 	"net/http"
 )
@@ -24,11 +26,26 @@ func main() {
 	projectService := project.NewProjectService(projectRepo)
 	projectHandler := project.NewProjectHandler(projectService)
 
+	taskRepo := task.NewTaskRepository(connect)
+	taskService := task.NewService(taskRepo)
+	taskHandler := task.NewHandler(taskService)
+
 	router := chi.NewRouter()
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://localhost:5173"},       // Разрешенные источники
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"}, // Разрешенные методы
+		AllowedHeaders:   []string{"Content-Type"},                 // Разрешенные заголовки
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true, // Разрешить использование учетных данных
+		MaxAge:           300,  // Максимальное время кэширования CORS
+	}))
 	router.Get("/projects", projectHandler.GetProjectsHandler)
 	router.Post("/projects", projectHandler.CreateProjectHandler)
 	router.Post("/projects/{id}", projectHandler.UpdateProjectHandler)
 	router.Delete("/projects/{id}", projectHandler.DeleteProjectHandler)
+
+	router.Get("/tasks", taskHandler.GetTasksHandler)
+	router.Post("/tasks", taskHandler.CreateTaskHandler)
 
 	serv := http.Server{
 		Addr:    "0.0.0.0:80",
