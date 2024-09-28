@@ -21,5 +21,5 @@ type Task struct {
 	Name        string `gorm:"not null" json:"name"`
 	Description string `json:"description"`
 	Status      int    `gorm:"not null" json:"status"` // Изменен тип с string на int
-	ProjectID   uint   `json:"projectid"`              // Внешний ключ на проект
+	ProjectID   uint   `json:"project_id"`             // Внешний ключ на проект
 }
