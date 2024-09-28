@@ -1,0 +1,80 @@
+import { Container, Flex, RadioButton } from "@gravity-ui/uikit";
+import { groupBy } from "lodash";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/store/store";
+
+import { Project } from "../../../api/fetchers/projectManagerSchemas";
+import { KanbanList } from "./../../components/KanbanList/KanbanList";
+
+interface KanbanPageProps {}
+
+export const KanbanPage: React.FC<KanbanPageProps> = () => {
+  const projects = useSelector<RootState>(
+    (state) => state.projects.projectsList,
+  ) as Project[];
+
+  const isLoading = useSelector<RootState>(
+    (state) => state.projects.isLoading,
+  ) as boolean;
+
+  const allTasks = projects.flatMap(
+    (project) =>
+      project?.tasks?.map((task) => ({
+        ...task,
+        projectData: { name: project.name, id: project.id },
+      })) ?? [],
+  );
+
+  const ALL_PROJECTS_FILTER = "ALL_u6xkasdkl12asd";
+
+  const [currentProjectId, setCurrentProjectId] = useState(ALL_PROJECTS_FILTER);
+
+  const allTasksGroupedByProject = groupBy(allTasks, "project_id");
+
+  const currentProject =
+    currentProjectId !== ALL_PROJECTS_FILTER
+      ? allTasksGroupedByProject[currentProjectId]
+      : allTasks;
+
+  const allTaksGroupedByStatus = groupBy(currentProject, "status");
+
+  return (
+    <Container maxWidth="xl">
+      <Flex direction="column" gap="4">
+        <div>
+          <RadioButton
+            options={[
+              {
+                value: ALL_PROJECTS_FILTER,
+                content: "Все проекты",
+              },
+              ...projects.map((project) => ({
+                value: String(project.id),
+                content: project.name,
+              })),
+            ]}
+            value={String(currentProjectId)}
+            onUpdate={(value) => {
+              setCurrentProjectId(value);
+            }}
+          />
+        </div>
+        <Flex gap="8">
+          <KanbanList
+            name="Ожидает"
+            flatTasks={allTaksGroupedByStatus[0] ?? []}
+          />
+          <KanbanList
+            name="В работе"
+            flatTasks={allTaksGroupedByStatus[1] ?? []}
+          />
+          <KanbanList
+            name="Выполнена"
+            flatTasks={allTaksGroupedByStatus[2] ?? []}
+          />
+        </Flex>
+      </Flex>
+    </Container>
+  );
+};
